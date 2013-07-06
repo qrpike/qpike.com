@@ -5,7 +5,7 @@
 		<meta name="description" content="My Personal Site">
 		<meta name="author" content="Quinton Pike - qrpike@gmail.com (qpike.com)" >
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;">
 		
 		<!-- CSS Styles -->
 		<link href="css/bootstrap.css" rel="stylesheet" media="screen">
@@ -43,7 +43,8 @@
 					<ul class="unstyled">
 						<li class="active" data-section="1"><i class="icon-home"></i> <span>Home</span></li>
 						<li data-section="2" class=""><i class="icon-user"></i> <span>About</span></li>
-						<li data-section="3" class=""><i class="icon-laptop"></i> <span>Code</span></li>
+						<li data-section="3" class=""><i class="icon-code"></i> <span>Code</span></li>
+						<li data-section="9" class=""><i class="icon-laptop"></i> <span>Design</span></li>
 						<li data-section="4" class=""><i class="icon-heart"></i> <span>Previous</span></li>
 						<li data-section="5" class=""><i class="icon-envelope"></i> <span>Contact</span></li>
 						<li data-section="6" class="last"><i class="icon-glass"></i> <span>Honor</span></li>
@@ -145,7 +146,52 @@
 				</section><!-- /section -->
 				
 				
-				
+				<section class="section" id="section9" data-section="9">
+					<div class="container-fluid">
+						<div class="row-fluid title">
+							<div class="span4">
+								<h2>Design</h2>
+							</div><!-- /span4 -->
+							<div class="span8 hidden-phone">	
+								<hr>
+							</div><!-- /span8 -->
+						</div>
+						<div class="row-fluid desc">
+							<div class="span8">
+								<p>These are my 3 latest designs posted on Dribbble.</p>
+							</div><!-- /span8 -->
+						</div>
+						<div class="row-fluid content" id="dribbbleLatest">
+						
+							<div class="span4"></div>
+							<div class="span4">
+								<h1>Loading...</h1>
+							</div> 
+							<div class="span4"></div>
+							
+						</div>
+						<script type="text/javascript">
+							$(function(){
+								
+								$.get('http://api.dribbble.com/players/qrpike/shots?page=1&per_page=3', function( shots ){
+									var html = '';
+									for( var x = 0, l = shots.shots.length; x < l; x++){
+										var shot = shots.shots[x];
+										html += 
+										'<div class="span4">'+
+											'<a href="'+shot.url+'">'+
+												'<img src="'+shot.image_400_url+'" class="img-rounded" alt="" />'+
+											'</a>'+
+											'<h6>'+shot.title+'</h6>'+
+										'</div>';
+									}
+									$('#dribbbleLatest').html( html );
+								},'jsonp')
+								
+							})
+						</script>
+					</div>
+				</section>
 				
 				
 				
@@ -358,6 +404,11 @@
 					</div>
 					
 				</section>
+				
+				
+				
+				
+				
 				
 			</div><!-- /container -->	
 		</div><!-- /wrapper -->		
