@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>face.api.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "face.api.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h2">
+        <a href="#face%20detection%20object%3A">Face Detection Object:</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>face.api.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary">
+  </div>
+  <div class="body"><p>Development by Quinton Pike
+contact: <a href='mailto:<a href='mailto:qrpike@gmail.com'>qrpike@gmail.com</a>'><a href='mailto:qrpike@gmail.com'>qrpike@gmail.com</a></a></p>
+
+<p>GitHub: <a href='https://github.com/qrpike/Javascript-Face-Detection-lib/'>https://github.com/qrpike/Javascript-Face-Detection-lib/</a> &lt;-- for instructions on using this lib.</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre></pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="face%20detection%20object%3A">
+  <h2>
+    <a href="#face%20detection%20object%3A" name="face%20detection%20object%3A" class="pilcrow">&#182;</a>
+    Face Detection Object:
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">function</span> <span class="nx">faceDetect</span><span class="p">(</span><span class="nx">params</span><span class="p">){</span>
+  
+  <span class="kd">var</span> <span class="nx">self</span>    <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+  <span class="nx">self</span><span class="p">.</span><span class="nx">imgUrl</span>   <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">imageUrl</span><span class="p">;</span> 
+  <span class="nx">self</span><span class="p">.</span><span class="nx">canvasID</span> <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">canvasID</span><span class="p">;</span>
+  <span class="nx">self</span><span class="p">.</span><span class="nx">image</span>    <span class="o">=</span> <span class="p">{};</span>
+  <span class="nx">self</span><span class="p">.</span><span class="nx">dim</span>    <span class="o">=</span> <span class="p">{};</span>
+  <span class="nx">self</span><span class="p">.</span><span class="nx">numFaces</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> 
+  <span class="nx">self</span><span class="p">.</span><span class="nx">timeElapsed</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">self</span><span class="p">.</span><span class="nx">pos</span>    <span class="o">=</span> <span class="p">{};</span> 
+  <span class="nx">self</span><span class="p">.</span><span class="nx">maxWidth</span> <span class="o">=</span> <span class="mi">600</span> <span class="o">||</span> <span class="nx">params</span><span class="p">.</span><span class="nx">maxWidth</span><span class="p">;</span>
+  <span class="nx">self</span><span class="p">.</span><span class="nx">maxHeight</span>  <span class="o">=</span> <span class="mi">600</span> <span class="o">||</span> <span class="nx">params</span><span class="p">.</span><span class="nx">maxHeight</span><span class="p">;</span>
+  
+  <span class="nx">self</span><span class="p">.</span><span class="nx">getImageDimensions</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">);</span>
+    <span class="nx">result</span><span class="p">[</span><span class="s1">&#39;width&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">offsetWidth</span><span class="p">;</span>
+    <span class="nx">result</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nx">self</span><span class="p">.</span><span class="nx">detectFace</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">){</span> 
+   
+    <span class="nx">self</span><span class="p">.</span><span class="nx">image</span>      <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">elapsed_time</span>  <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">getTime</span><span class="p">(),</span>
+      <span class="nx">canvas</span>      <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">canvasID</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">ctx</span>       <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">);</span>
+    
+    <span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>Variables:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">self</span><span class="p">.</span><span class="nx">dim</span>      <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">getImageDimensions</span><span class="p">();</span>
+      <span class="kd">var</span> <span class="nx">boundingWidth</span>   <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">maxWidth</span><span class="p">,</span>
+        <span class="nx">boundingHeight</span>  <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">maxHeight</span><span class="p">,</span> 
+        <span class="nx">newWidth</span>    <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">dim</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> 
+        <span class="nx">newHeight</span>     <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">dim</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span> 
+        <span class="nx">scale</span>       <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>Calc Size:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">dim</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">boundingHeight</span> <span class="o">&gt;</span> <span class="nx">boundingWidth</span> <span class="o">*</span> <span class="nx">self</span><span class="p">.</span><span class="nx">dim</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">newWidth</span>  <span class="o">=</span> <span class="nx">boundingWidth</span><span class="p">;</span>
+        <span class="nx">newHeight</span>   <span class="o">=</span> <span class="nx">boundingWidth</span> <span class="o">*</span> <span class="nx">self</span><span class="p">.</span><span class="nx">dim</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="nx">self</span><span class="p">.</span><span class="nx">dim</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+        <span class="nx">scale</span>     <span class="o">=</span> <span class="nx">newWidth</span> <span class="o">/</span> <span class="nx">self</span><span class="p">.</span><span class="nx">dim</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">newHeight</span>   <span class="o">=</span> <span class="nx">boundingHeight</span><span class="p">;</span>
+        <span class="nx">newWidth</span>  <span class="o">=</span> <span class="nx">boundingHeight</span> <span class="o">*</span> <span class="nx">self</span><span class="p">.</span><span class="nx">dim</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="nx">self</span><span class="p">.</span><span class="nx">dim</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+        <span class="nx">scale</span>     <span class="o">=</span> <span class="nx">newHeight</span> <span class="o">/</span> <span class="nx">self</span><span class="p">.</span><span class="nx">dim</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+      <span class="p">}</span> 
+      
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Set Canvas Size:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span>    <span class="o">=</span> <span class="nx">newWidth</span><span class="p">;</span>
+      <span class="nx">canvas</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span>  <span class="o">=</span> <span class="nx">newWidth</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">;</span>
+      <span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span>     <span class="o">=</span> <span class="nx">newHeight</span><span class="p">;</span>
+      <span class="nx">canvas</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">newHeight</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">;</span>
+      
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>Draw back to Canvas:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">newWidth</span><span class="p">,</span> <span class="nx">newHeight</span><span class="p">);</span>
+      <span class="nx">elapsed_time</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">getTime</span><span class="p">();</span>
+      
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>Callback function for FaceDetection:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="kd">function</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">comp</span><span class="p">)</span> <span class="p">{</span>
+          
+        <span class="nx">self</span><span class="p">.</span><span class="nx">pos</span>      <span class="o">=</span> <span class="nx">comp</span><span class="p">;</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">numFaces</span>     <span class="o">=</span> <span class="nx">comp</span><span class="p">.</span><span class="nx">length</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">timeElapsed</span>  <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">((</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="nx">elapsed_time</span><span class="p">).</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;ms&quot;</span><span class="p">;</span>  
+        <span class="nx">ctx</span><span class="p">.</span><span class="nx">lineWidth</span>     <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="nx">ctx</span><span class="p">.</span><span class="nx">strokeStyle</span>   <span class="o">=</span> <span class="s1">&#39;rgba(230,87,0,0.8)&#39;</span><span class="p">;</span>
+        
+        <span class="cm">/* draw detected area */</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">comp</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">ctx</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+          <span class="nx">ctx</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span>
+            <span class="p">(</span><span class="nx">comp</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">comp</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">width</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="nx">scale</span><span class="p">,</span> 
+            <span class="p">(</span><span class="nx">comp</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">comp</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">height</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="nx">scale</span><span class="p">,</span>
+            <span class="p">(</span><span class="nx">comp</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">comp</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">height</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="nx">scale</span> <span class="o">*</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> 
+            <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">*</span> <span class="mi">2</span>
+          <span class="p">);</span>
+          <span class="nx">ctx</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="nx">cb</span><span class="p">();</span>
+        
+      <span class="p">}</span>
+      
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p>Run face detection:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">ccv</span><span class="p">.</span><span class="nx">detect_objects</span><span class="p">({</span> 
+        <span class="s2">&quot;canvas&quot;</span>    <span class="o">:</span> <span class="nx">ccv</span><span class="p">.</span><span class="nx">grayscale</span><span class="p">(</span><span class="nx">ccv</span><span class="p">.</span><span class="nx">pre</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">)),</span>
+        <span class="s2">&quot;cascade&quot;</span>     <span class="o">:</span> <span class="nx">cascade</span><span class="p">,</span>
+        <span class="s2">&quot;interval&quot;</span>    <span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;min_neighbors&quot;</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;async&quot;</span>     <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s2">&quot;worker&quot;</span>    <span class="o">:</span> <span class="mi">1</span> 
+      <span class="p">})(</span><span class="nx">callback</span><span class="p">);</span>
+      
+    <span class="p">};</span>
+    
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<p>Image Setter:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">imgUrl</span><span class="p">;</span>
+    
+  <span class="p">}</span>
+  
+<span class="p">}</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
