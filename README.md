@@ -1,8 +1,13 @@
 #My Personal Website
-### Can be viewed: qpike.com
+### Can be viewed at qpike.com
 =========
 
-This is just a public repo of my personal web page. It is just a 1 pager with some details about me in it. 
+
+Code samples can be viewed here:
+[Code Samples](https://github.com/qrpike/quintonpike.com/tree/master/assets/code)
+
+Thanks for checking it out, hopefully you visit the page!
+
 
 ###[http://www.qpike.com](http://qpike.com)
 =====
