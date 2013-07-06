@@ -4,7 +4,7 @@
 
 This is just a public repo of my personal web page. It is just a 1 pager with some details about me in it. 
 
-###[http://www.qpike.com](http://qpike)
+###[http://www.qpike.com](http://qpike.com)
 =====
 
 Thumbnail:
