@@ -1,0 +1,68 @@
+@import "reset";
+@import "mixins";
+
+
+#wrapper {
+	
+	background: #050505;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	
+	#hullWrapper {
+		
+		background: url(../img/hull.png) center center no-repeat;
+		width: 759px;
+		height: 768px;
+		position: fixed;
+		left: 50%;
+		margin-left: -370px;
+		top: 50%;
+		margin-top: -384px;
+		z-index: 5; 
+		
+	}
+	
+	#turbine {
+			
+		background: url(../img/turbine.png) center center no-repeat;
+		position: absolute;
+		width: 536px;
+		height: 536px;
+		z-index: 4;
+		left: 50%;
+		top: 50%;
+		margin-left: -258px;
+		margin-top: -270px;
+		-webkit-animation-name: rotate;
+		-webkit-animation-duration: 20s;
+		-webkit-animation-iteration-count: infinite;
+		-webkit-animation-timing-function: linear;
+		
+	}
+	
+}
+
+
+#cloudOverlay {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 9;
+	background: url(../img/clouds.png) center center no-repeat;
+	background-size: cover;
+}
+
+
+@-webkit-keyframes rotate {
+	from {
+		-webkit-transform: rotate(360deg);
+	}
+	to {
+		-webkit-transform: rotate(0deg);
+	}
+}
