@@ -1,0 +1,4 @@
+body{background:#f2f2f2}
+.animate-enter,.animate-leave{-webkit-transition:400ms cubic-bezier(.25, .25, .75, .75) all;-moz-transition:400ms cubic-bezier(.25, .25, .75, .75) all;-ms-transition:400ms cubic-bezier(.25, .25, .75, .75) all;-o-transition:400ms cubic-bezier(.25, .25, .75, .75) all;transition:400ms cubic-bezier(.25, .25, .75, .75) all;position:relative;display:block;overflow:hidden;text-overflow:clip;white-space:nowrap}
+.animate-leave.animate-leave-active,.animate-enter{opacity:0;height:0}
+.animate-enter.animate-enter-active,.animate-leave{opacity:1;height:30px}
