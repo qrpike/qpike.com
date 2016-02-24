@@ -15,7 +15,7 @@ deploy:
     url: $$RANCHER_URL
     access_key: $$RANCHER_KEY
     secret_key: $$RANCHER_SECRET
-    service: ui/trip
+    service: qrpike/qrpike-com
     docker_image: docker.stackdot.com/qrpike/qrpike:$$BRANCH.$$BUILD_NUMBER
     confirm: true
     timeout: 300
