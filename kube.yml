@@ -19,7 +19,8 @@ spec:
       restartPolicy: Always
       containers:
         - name: qpike
-          image: docker.stackdot.com/personal/qrpike:latest
+          image: docker.stackdot.com/personal/qrpike:{{build.branch}}.build-{{build.number}}
+          # image: docker.stackdot.com/personal/qrpike:latest
           ports:
             - name: http
               containerPort: 80
