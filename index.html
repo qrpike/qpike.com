@@ -18,7 +18,7 @@
 		<![endif]-->
 	
 		<!--[if lt IE 9]>
-			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		
 		<!-- JS Files -->
@@ -188,7 +188,7 @@
 						<script type="text/javascript">
 							$(function(){
 								
-								$.get('http://api.dribbble.com/players/qrpike/shots?page=1&per_page=3', function( shots ){
+								$.get('https://api.dribbble.com/players/qrpike/shots?page=1&per_page=3', function( shots ){
 									var html = '';
 									for( var x = 0, l = shots.shots.length; x < l; x++){
 										var shot = shots.shots[x];
