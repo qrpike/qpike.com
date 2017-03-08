@@ -13,5 +13,6 @@ pipeline:
   deploy:
     image: vallard/drone-kube
     template: kube.yml
+    namespace: personal
     when:
       branch: master
