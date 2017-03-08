@@ -1,23 +1,17 @@
-publish:
-  docker:
-    repo: personal/qrpike
-    tag:
-      - '$${BRANCH/master/latest}'
-      - '$$BRANCH.$$BUILD_NUMBER'
-    registry: docker.stackdot.com
-    username: $$DRONE_REGISTRY_USER
-    password: $$DRONE_REGISTRY_PASS
-    email: drone@stackdot.com
-    storage_driver: overlay
 
-deploy:
-  rancher:
-    url: $$RANCHER_URL
-    access_key: $$RANCHER_KEY
-    secret_key: $$RANCHER_SECRET
-    service: qrpike/qrpike-com
-    docker_image: docker.stackdot.com/personal/qrpike:$$BRANCH.$$BUILD_NUMBER
-    confirm: true
-    timeout: 300
+pipeline:
+  docker:
+    image: plugins/docker
+    repo: docker.stackdot.com/personal/qrpike
+    tag:
+      - '${DRONE_BRANCH/master/latest}'
+      - '${DRONE_BRANCH}.build-${DRONE_BUILD_NUMBER}'
+    storage_driver: overlay
+    when:
+      branch: master
+
+  deploy:
+    image: vallard/drone-kube
+    template: kube.yml
     when:
       branch: master

@@ -1,0 +1,89 @@
+
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: qpike
+  namespace: personal
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: qpike
+        project: personal
+        type: ui
+    spec:
+      imagePullSecrets:
+        - name: stackdot-registry
+      restartPolicy: Always
+      containers:
+        - name: qpike
+          image: docker.stackdot.com/personal/qrpike:latest
+          ports:
+            - name: http
+              containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: .1
+              memory: 50M
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: qpike
+  name: qpike
+  namespace: personal
+spec:
+  ports:
+    - port: 80
+      targetPort: http
+  selector:
+    app: qpike
+
+
+---
+
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: qpike
+  namespace: personal
+  annotations:
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+    - secretName: qrpike-tls
+      hosts:
+        - qpike.com
+        - www.qpike.com
+  rules:
+    - host: qpike.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: qpike
+              servicePort: 80
+    - host: www.qpike.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: qpike
+              servicePort: 80
+
+
