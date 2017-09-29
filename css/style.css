@@ -467,9 +467,26 @@ a:hover {
 #section5 {
 	background:#1abc9c;
 	color: #F1F1F1;
-	padding-bottom: 0px;
+	padding-bottom: 8px;
 }
-
+#section5 p {
+	font-size: 14px;
+}
+#section5 img {
+	margin-bottom: 18px;
+	max-width: 120px;
+	max-height: 120px;
+}
+#section5 .imgbox {
+	text-align: center;
+	height: 150px;
+}
+#section5 .itembox {
+	margin-bottom: 80px;
+}
+#section5 .titlebox {
+	text-align: center;
+}
 #section5 h4.intro {
 	border-bottom: 1px solid #F1F1F1;
     height: 35px;
