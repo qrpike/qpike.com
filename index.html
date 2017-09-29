@@ -72,7 +72,7 @@
 							<div class="span6 intro">
 								<hgroup>
 									<h1>Hello World</h1>
-									<h3>I am Quinton Pike, a web developer / designer living in Atlanta.</h3>
+									<h3>I am Quinton Pike, developer / designer living in Atlanta</h3>
 								</hgroup>
 								<button class="btn-inverse" data-section="2">
 									Learn <span>More</span>
@@ -97,8 +97,8 @@
 						
 						<div class="row-fluid desc">
 							<div class="span8">
-								<p>Web professional with extensive web development & design experience. A passion for perfection. Capable of proactively managing projects simultaneously under short deadlines and pressure. Energetic, hardworking, excellent communication skills and eager to learn new technologies and to enhance current skill set. Great track record of completing projects within time and budget, capitalizing on communication and reporting.</p>
-								<p><strong>Specialties:</strong> CSS3, HTML5, Javascript, CoffeeScript, jQuery, NodeJS, *Nix</p>
+								<p><strong>Loves to learn</strong> Web professional with extensive web development & design experience. A passion for perfection. Capable of proactively managing projects simultaneously under short deadlines and pressure. Energetic, hardworking, excellent communication skills and eager to learn new technologies and to enhance current skill set. Great track record of completing projects within time and budget, capitalizing on communication and reporting.</p>
+								<p><strong>Specialties:</strong> Angular, Backbone, Material, Bulma, Gulp, LESS/SCSS, Webpack, Nodejs, Docker, Drone, Kubernetes, CoreOS - <i>And Many More</i></p>
 							</div><!-- /span8 -->
 						</div><!-- /row-fluid -->
 						 
@@ -133,19 +133,16 @@
 						
 						<div class="row-fluid content slide">
 							<div class="span4">
-								<h5>Model Driven View Library</h5>
-								<li><a href="assets/code/mdv.coffee.txt">Code Source</a></li>
-								<li><a href="assets/code/documentation/mdv.coffee.html">Documentation</a></li>
+								<h5>Sketch CLI tool ( NodeJS )</h5>
+								<li><a target="_blank" href="https://github.com/stackdot/sketch-tool">App Repo</a></li>
 							</div><!-- /span4 -->
 							<div class="span4"> 
-								<h5>Nodejs Git Server</h5>
-								<li><a href="assets/code/git-server.coffee.txt">Code Source</a></li>
-								<li><a href="assets/code/documentation/git-server.coffee.html">Documentation</a></li>
+								<h5>Sketch Previewer ( Angular 1.X )</h5>
+								<li><a target="_blank" href="https://github.com/stackdot/sketch-preview">App Repo</a></li>
 							</div><!-- /span4 -->
-							<div class="span4"> 
-								<h5>JS Face Detection API</h5>
-								<li><a href="assets/code/face.api.txt">Code Source</a></li>
-								<li><a href="assets/code/documentation/face.api.js.html">Documentation</a></li> 
+							<div class="span4">
+								<h5>BBView ( BackboneJS, old ) </h5>
+								<li><a target="_blank" href="https://github.com/qrpike/bb-view/blob/master/bb-view.js">Code Source</a></li>
 							</div><!-- /span4 -->
 						</div><!-- /row-fluid -->
 	
@@ -173,38 +170,34 @@
 						</div>
 						<div class="row-fluid desc">
 							<div class="span8">
-								<p>These are my 3 latest designs posted on Dribbble.</p>
+								<p>Here are a couple of my designs posted on Dribbble.</p>
 							</div><!-- /span8 -->
 						</div>
 						<div class="row-fluid content" id="dribbbleLatest">
 						
-							<div class="span4"></div>
+
 							<div class="span4">
-								<h1>Loading...</h1>
-							</div> 
-							<div class="span4"></div>
+								<a href="https://dribbble.com/shots/1172411-STACKDOT-Client-Admin-Page">
+									<img src="https://cdn.dribbble.com/users/75169/screenshots/1172411/client-admin-2_1x.png">
+								</a>
+								<h5 style="margin-top: 8px;">Client Admin Page</h5>
+							</div>
+
+							<div class="span4">
+								<a href="https://dribbble.com/shots/1170916-STACKDOT-Logo-Finalized">
+									<img src="https://cdn.dribbble.com/users/75169/screenshots/1170916/1-thumb_1x.png">
+								</a>
+								<h5 style="margin-top: 8px;">Logo Concept</h5>
+							</div>
+
+							<div class="span4">
+								<a href="https://dribbble.com/shots/792637-Stackdot">
+									<img src="https://cdn.dribbble.com/users/75169/screenshots/792637/stackdot-dribbble_1x.png">
+								</a>
+								<h5 style="margin-top: 8px;">Landing Page</h5>
+							</div>
 							
 						</div>
-						<script type="text/javascript">
-							$(function(){
-								
-								$.get('https://api.dribbble.com/users/qrpike/shots?page=1&per_page=3', function( shots ){
-									var html = '';
-									for( var x = 0, l = shots.shots.length; x < l; x++){
-										var shot = shots.shots[x];
-										html += 
-										'<div class="span4">'+
-											'<a href="'+shot.url+'">'+
-												'<img src="'+shot.image_400_url+'" class="img-rounded" alt="" />'+
-											'</a>'+
-											'<h6>'+shot.title+'</h6>'+
-										'</div>';
-									}
-									$('#dribbbleLatest').html( html );
-								},'jsonp')
-								
-							})
-						</script>
 					</div>
 				</section>
 				
@@ -252,7 +245,7 @@
 						</div><!-- /row-fluid -->
 						<div class="row-fluid desc">
 							<div class="span8">
-								<p>Some places I have been lucky enough to be a part of, and spend time coding, learning, and even some teaching great nerd stuff at.</p>
+								<p>Some places I have been lucky enough to be a part of:</p>
 							</div><!-- /span8 -->
 						</div><!-- /row-fluid --> 
 						<div class="row-fluid">
